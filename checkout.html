@@ -1,0 +1,28 @@
+<!-- checkout.html -->
+
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1>Checkout</h1>
+    <form method="post" action="{{ url_for('checkout') }}">
+        <!-- Display the user's billing information -->
+        <h3>Billing Information</h3>
+        <p>{{ billing_info.cardholder_name }}</p>
+        <p>{{ billing_info.card_number }}</p>
+        <p>{{ billing_info.expiration_month }}/{{ billing_info.expiration_year }}</p>
+        <!-- Add more billing information as needed -->
+
+        <!-- Display the user's cart items -->
+        <h3>Cart Items</h3>
+        <!-- Iterate through the items and display them -->
+        {% for item in items %}
+            <div>
+                <p>{{ item.name }}</p>
+                <p>Price: {{ item.price }}</p>
+            </div>
+        {% endfor %}
+
+        <!-- Add a button to submit the form -->
+        <button type="submit">Place Order</button>
+    </form>
+{% endblock %}

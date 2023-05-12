@@ -1,0 +1,62 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Billing Information</h2>
+
+  {% if billing_info %}
+    <div class="current-billing-info">
+      <h3>Current Billing Information</h3>
+      <p><strong>Full Name:</strong> {{ billing_info.full_name }}</p>
+      <p><strong>Address:</strong> {{ billing_info.address }}</p>
+      <p><strong>City:</strong> {{ billing_info.city }}</p>
+      <p><strong>State:</strong> {{ billing_info.state }}</p>
+      <p><strong>Zip Code:</strong> {{ billing_info.zip_code }}</p>
+      <p><strong>Country:</strong> {{ billing_info.country }}</p>
+      <p><strong>Phone:</strong> {{ billing_info.phone }}</p>
+      <a href="{{ url_for('update_billing_info') }}">Edit Billing Information</a>
+      <a href="{{ url_for('remove_billing_info') }}">Remove Billing Information</a>
+    </div>
+  {% endif %}
+
+  <div class="add-billing-info">
+    <h3>{% if billing_info %}Add or Update{% else %}Add{% endif %} Billing Information</h3>
+    <form action="{{ url_for('update_billing_info') }}" method="post">
+      <label for="full_name">Nome completo</label>
+      <input type="text" id="full_name" name="full_name" required><br><br>
+
+      <label for="address">Endereço/Morada:</label>
+      <input type="text" id="address" name="address" required><br><br>
+
+      <label for="city">Cidade:</label>
+      <input type="text" id="city" name="city" required><br><br>
+
+      <label for="state">Estado/Freguesia:</label>
+      <input type="text" id="state" name="state" required><br><br>
+
+      <label for="zip_code">Código Postal</label>
+      <input type="text" id="zip_code" name="zip_code" required><br><br>
+
+      <label for="country">País:</label>
+      <input type="text" id="country" name="country" required><br><br>
+
+      <label for="phone">Telefone:</label>
+      <input type="tel" id="phone" name="phone" required><br><br>
+
+      <input type="submit" value="Submit">
+        <input type="submit" value="Submit">
+    </form>
+  </div>
+  
+  <div class="credit-card-info">
+    <h3>Credit Card Information</h3>
+    {% if credit_card_info %}
+      <!-- Display credit card information here -->
+      <a href="{{ url_for('update_credit_card_info') }}">Edit Credit Card Information</a>
+      <a href="{{ url_for('remove_credit_card_info') }}">Remove Credit Card Information</a>
+    {% else %}
+      <p>No credit card information found. <a href="{{ url_for('add_credit_card_info') }}">Add Credit Card Information</a></p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

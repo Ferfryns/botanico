@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+
+{% block content %}
+  <h2>Update Orders</h2>
+  <div class="container">
+    <div class="orders">
+      {% for order in orders %}
+      <div class="order">
+        <h4>Order ID: {{ order.id }}</h4>
+        <p>{{ order.description }}</p> 
+        <a href="{{ url_for('update_orders', order_id=order.id) }}">Update Order</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

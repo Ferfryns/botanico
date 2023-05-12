@@ -1,0 +1,41 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Order Details</h2>
+  <div class="order-details">
+    <p><strong>ID do pedido:</strong> {{ order.id }}</p>
+    <p><strong>Data do pedido:</strong> {{ order.date }}</p>
+    <p><strong>Status do pedido:</strong> {{ order.status }}</p>
+    <p><strong>Total:</strong> {{ order.total }}</p>
+  </div>
+
+  <div class="order-items">
+    <h3>Items neste pedido:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Productos</th>
+          <th>Preço</th>
+          <th>Quantidade</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in order.items %}
+        <tr>
+          <td>{{ item.product_name }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.subtotal }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="back-to-order-history-link">
+    <p>Conseguiu verificar todos os detalhes? <a href="{{ url_for('order_history') }}">Voltar para o histórico de compras.</a>.</p>
+  </div>
+</div>
+{% endblock %}
