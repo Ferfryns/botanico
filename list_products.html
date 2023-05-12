@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+
+{% block content %}
+  <h2>Product List</h2>
+
+  <div class="products">
+    {% for product in products %}
+    <div class="product">
+      <img src="{{ product.image_url }}" alt="{{ product.name }}" />
+      <h4>{{ product.name }}</h4>
+      <p>{{ product.description }}</p>
+      <p>Price: {{ product.price }}</p>
+
+      <div class="admin-actions">
+        <a href="{{ url_for('edit_product', product_id=product.id) }}">Edit Product</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

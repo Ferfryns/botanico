@@ -1,0 +1,53 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Store</h2>
+
+  {% if admin_logged_in %}
+  <div class="add-product">
+    <h3>Add New Product</h3>
+    <form method="POST" action="{{ url_for('store') }}">
+      <input type="hidden" name="action" value="add">
+      <input type="text" name="name" placeholder="Product Name" required>
+      <input type="number" name="price" placeholder="Price" step="0.01" required>
+      <textarea name="description" placeholder="Description" required></textarea>
+      <input type="url" name="image_url" placeholder="Image URL" required>
+      <button type="submit">Add Product</button>
+    </form>
+  </div>
+  {% endif %}
+
+  <div class="products">
+    {% for product in products %}
+    <div class="product">
+      <img src="{{ product.image_url }}" alt="{{ product.name }}" />
+      <h4>{{ product.name }}</h4>
+      <p>{{ product.description }}</p>
+      <p>Price: {{ product.price }}</p>
+
+      {% if admin_logged_in %}
+      <div class="admin-actions">
+        <h3>Edit Product</h3>
+        <form method="POST" action="{{ url_for('store') }}">
+          <input type="hidden" name="action" value="edit">
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+          <input type="text" name="name" value="{{ product.name }}" required>
+          <input type="number" name="price" value="{{ product.price }}" step="0.01" required>
+          <textarea name="description" required>{{ product.description }}</textarea>
+          <input type="url" name="image_url" value="{{ product.image_url }}" required>
+          <button type="submit">Save Changes</button>
+        </form>
+
+        <form method="POST" action="{{ url_for('store') }}">
+          <input type="hidden" name="action" value="delete">
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+          <button type="submit">Delete Product</button>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

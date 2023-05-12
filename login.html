@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<style>
+  .container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  .login-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #00703C;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .login-form button:hover {
+    background-color: #006400;
+  }
+  .register-link {
+    text-align: center;
+  }
+  .register-link a {
+    color: #00703C;
+    text-decoration: none;
+  }
+  .register-link a:hover {
+    text-decoration: underline;
+  }
+</style>
+<div class="container">
+  <h2>Entrar</h2>
+  <div class="login-form">
+    <form method="POST" action="{{ url_for('login') }}">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Entrar!</button>
+    </form>
+  </div>
+  <div class="register-link">
+    <p>Não tem conta? Acesse: <a href="{{ url_for('create_account') }}">É rápido e simples!</a>.</p>
+  </div>
+</div>
+{% endblock %}

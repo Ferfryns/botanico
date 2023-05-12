@@ -1,0 +1,44 @@
+{% extends 'home.html' %}
+
+{% block content %}
+  <h2>Admin Dashboard</h2>
+
+  <div>
+    <h3>Product Management</h3>
+    <ul>
+      <li><a href="{{ url_for('add_products') }}">Add Product</a></li>
+      <li><a href="{{ url_for('list_products') }}">Edit Products</a></li>
+      <li><a href="{{ url_for('delete_products') }}">Delete Products</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Order Management</h3>
+    <ul>
+      <li><a href="{{ url_for('view_orders') }}">View Orders</a></li>
+      <li><a href="{{ url_for('list_orders_to_update') }}">Update Orders</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h3>User Management</h3>
+    <ul>
+      <li><a href="{{ url_for('check_users') }}">Check Users</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Sales Analytics</h3>
+    <ul>
+      <li><a href="{{ url_for('sales', period='today') }}">Today's Sales</a></li>
+      <li><a href="{{ url_for('sales', period='week') }}">Weekly Sales</a></li>
+      <li><a href="{{ url_for('sales', period='month') }}">Monthly Sales</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Online Users</h3>
+    <p>There are currently {{ online_users }} users online.</p>
+  </div>
+
+{% endblock %}

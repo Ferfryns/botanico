@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  .contact-form textarea {
+    resize: vertical;
+    height: 150px;
+  }
+  .contact-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #00703C;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .contact-form button:hover {
+    background-color: #006400;
+  }
+</style>
+<div class="container">
+  <h2>Contacte-nos!</h2>
+  <div class="contact-info">
+    <p><strong>Local:</strong> De Lisboa para o mundo! </p>
+    <p><strong>Telefone:</strong> 933 054 865 </p>
+    <p><strong>Horário:</strong> Nossa loja é 24/7 e apenas ONLINE! </p>
+  </div>
+
+  <div class="contact-form">
+    <h3>Nos envie uma mensagem:</h3>
+    <form method="POST" action="{{ url_for('contacts') }}">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

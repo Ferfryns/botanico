@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='site.css')}}">
+    <style type="text/css">
+        body {
+            background-color: #d2f8ec;
+            font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+            font-size: 16px;
+            color: #333333;
+            margin: 0;
+        }
+        
+        header, nav {
+            background-color: #00703C;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+        .logo {
+            font-family: Garamond, serif;
+            font-size: 43px;
+            color: #d2f8ec;
+            margin: 0;
+        }
+        footer {
+            background-color: #006400;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 10px;
+        }
+        .main {
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        h1 {
+            font-size: 32px;
+            margin-top: 0;
+        }
+        footer a {
+            color: #FFFFFF;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .hero {
+            background-image: url('https://source.unsplash.com/featured/?plants');
+            background-position: center;
+            background-size: cover;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffffff;
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .hero {
+                height: 40vh;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="logo">Selva Plantas</h1>
+        <nav>
+            <a href="{{ url_for('home')}}">Início</a>
+            <a href="{{ url_for('contacts')}}">Contactos</a>
+            <a href="{{ url_for('store')}}">Loja</a>
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('dashboard') }}">Minha Area</a></li>
+        {% else %}
+            <li><a href="{{ url_for('login') }}">Entrar</a></li>
+        {% endif %}
+            <a href="{{ url_for('about_us')}}">Quem somos?</a>
+        </nav>
+    </header>
+    
+    <div class="hero">Selva Plantas - De Lisboa para o mundo!</div>
+
+    <div class="main">
+        {% block content %}
+            <h2>Welcome to Selva Plantas!</h2>
+            <p>This is a clean and simple website designed to help you find the best selection of plants and gardening products. We are committed to providing expert advice and exceptional customer service, ensuring you have a seamless shopping experience.</p>
+            <p>Browse our <a href="{{ url_for('store') }}">online store</a> to discover a wide range of plants and gardening products, and don't hesitate to <a href="{{ url_for('contacts') }}">contact us</a> if you have any questions or need assistance.</p>
+        {% endblock %}
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 Selva Plantas. All rights reserved by Fernando Salvador.</p>
+        <nav>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+        </nav>
+    </footer>
+</body>
+</html>

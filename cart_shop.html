@@ -1,0 +1,35 @@
+{% extends 'home.html' %}
+
+{% block content %}
+  <h2>Shopping Cart</h2>
+  <form action="/update_cart" method="post">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+          <tr>
+            <td>{{ item.product_name }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+              <input type="number" name="quantity_{{ item.id }}" value="{{ item.quantity }}" min="1">
+            </td>
+            <td>{{ item.total }}</td>
+            <td>
+              <a href="/remove_from_cart/{{ item.id }}">Remove</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <input type="submit" value="Update Cart">
+  </form>
+  <a href="/checkout">Proceed to Checkout</a>
+{% endblock %}
